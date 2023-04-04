@@ -9,6 +9,8 @@
  *       b if sel == 01
  *       c if sel == 10
  *       d if sel == 11
+ * this is basically the expansion of the first Mux function,
+ * where the sel determines the output bus as the input bus
  */
 
 CHIP Mux4Way16 {
@@ -16,5 +18,8 @@ CHIP Mux4Way16 {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+    Mux16(a=a, b=b, sel=sel[0], out=mux1);
+	Mux16(a=c, b=d, sel=sel[0], out=mux2);
+	Mux16(a=mux1, b=mux2, sel=sel[1], out=out);
+
 }
